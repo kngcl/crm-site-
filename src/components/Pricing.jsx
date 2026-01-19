@@ -91,40 +91,50 @@ const Pricing = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mt-20">
           {pricingTiers.map((tier, index) => (
             <div
               key={index}
-              className={`relative rounded-3xl overflow-hidden transition-all duration-500 ${
+              className={`relative transition-all duration-500 ${
                 tier.highlight
-                  ? 'transform scale-105 md:scale-110 z-10'
+                  ? 'transform md:scale-105 z-10'
                   : 'hover:-translate-y-2'
               }`}
             >
-              {/* Badge */}
+              {/* Badge - Positioned ABOVE the card */}
               {tier.badge && (
-                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-20">
-                  <div className="relative">
-                    <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 px-6 py-2 rounded-full text-sm font-bold shadow-xl flex items-center gap-2">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 w-full flex justify-center">
+                  <div className="relative animate-bounce-slow">
+                    <div className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 text-gray-900 px-8 py-3 rounded-full text-base font-extrabold shadow-2xl flex items-center gap-2 border-4 border-white">
+                      <svg className="w-5 h-5 animate-spin-slow" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
-                      {tier.badge}
+                      <span className="uppercase tracking-wide">{tier.badge}</span>
+                      <svg className="w-5 h-5 animate-spin-slow" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
                     </div>
+                    {/* Glow behind badge */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-300 blur-xl opacity-60 -z-10"></div>
                   </div>
                 </div>
               )}
 
               {/* Card */}
-              <div className={`h-full p-8 ${
+              <div className={`rounded-3xl overflow-hidden h-full shadow-2xl border-2 ${
                 tier.highlight
-                  ? 'bg-gradient-to-br from-primary-600 via-blue-600 to-purple-600 text-white shadow-2xl'
-                  : 'bg-white shadow-xl hover:shadow-2xl border-2 border-gray-100'
+                  ? 'border-yellow-400'
+                  : 'border-gray-100'
               }`}>
-                {/* Plan Name */}
-                <h3 className={`text-2xl font-bold mb-3 ${tier.highlight ? 'text-white' : 'text-gray-900'} ${tier.badge ? 'mt-4' : ''}`}>
-                  {tier.name}
-                </h3>
+                <div className={`h-full p-8 ${
+                  tier.highlight
+                    ? 'bg-gradient-to-br from-primary-600 via-blue-600 to-purple-600 text-white'
+                    : 'bg-white hover:shadow-2xl'
+                }`}>
+                  {/* Plan Name */}
+                  <h3 className={`text-2xl font-bold mb-3 ${tier.highlight ? 'text-white mt-6' : 'text-gray-900'}`}>
+                    {tier.name}
+                  </h3>
 
                 {/* Price */}
                 <div className="mb-6">
@@ -167,17 +177,18 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                {/* CTA Button */}
-                <button
-                  onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                  className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 ${
-                    tier.highlight
-                      ? 'bg-white text-primary-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl'
-                      : 'bg-gradient-to-r from-primary-600 to-blue-600 text-white hover:from-primary-700 hover:to-blue-700 shadow-lg hover:shadow-xl'
-                  }`}
-                >
-                  {tier.cta}
-                </button>
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                    className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 ${
+                      tier.highlight
+                        ? 'bg-white text-primary-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl'
+                        : 'bg-gradient-to-r from-primary-600 to-blue-600 text-white hover:from-primary-700 hover:to-blue-700 shadow-lg hover:shadow-xl'
+                    }`}
+                  >
+                    {tier.cta}
+                  </button>
+                </div>
               </div>
 
               {/* Glow Effect for Highlighted Card */}
